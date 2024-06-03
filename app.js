@@ -3,7 +3,7 @@ import express from "express";
 import mongoose from "mongoose";
 import router from "./routes/user-routes";
 import blogRouter from "./routes/blog-routes";
-// import serverless from "serverless-http";
+import serverless from "serverless-http";
 
 dotenv.config();
 
@@ -31,4 +31,4 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 // Export the app wrapped in serverless-http for AWS Lambda
-// export const handler = serverless(app);
+export const handler = serverless(app);
