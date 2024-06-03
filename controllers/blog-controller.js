@@ -1,8 +1,8 @@
-import mongoose from "mongoose";
-import Blog from "../model/Blog";
-import User from "../model/User";
+const mongoose = require("mongoose");
+const Blog = require("../model/Blog");
+const User = require("../model/User");
 
-export const getAllBlogs = async (req, res, next) => {
+const getAllBlogs = async (req, res, next) => {
   let blogs;
 
   try {
@@ -16,7 +16,7 @@ export const getAllBlogs = async (req, res, next) => {
   return res.status(200).json({ blogs });
 };
 
-export const addBlog = async (req, res, next) => {
+const addBlog = async (req, res, next) => {
   const { title, description, image, user } = req.body;
   let existingUser;
   try {
@@ -46,7 +46,7 @@ export const addBlog = async (req, res, next) => {
   }
   return res.status(200).json({ message: "Blog Created Successfully", blog });
 };
-export const updateBlog = async (req, res, next) => {
+const updateBlog = async (req, res, next) => {
   const { title, description } = req.body;
   const blogId = req.params?.id;
   let blog;
@@ -61,7 +61,7 @@ export const updateBlog = async (req, res, next) => {
   return res.status(200).json({ message: "Blog Updated Successfully", blog });
 };
 
-export const getById = async (req, res, next) => {
+const getById = async (req, res, next) => {
   const blogId = req.params?.id;
   let blog;
   try {
@@ -75,7 +75,7 @@ export const getById = async (req, res, next) => {
   return res.status(200).json({ blog });
 };
 
-export const deleteBlog = async (req, res, next) => {
+const deleteBlog = async (req, res, next) => {
   const blogId = req.params?.id;
   let blog;
   try {
@@ -91,7 +91,7 @@ export const deleteBlog = async (req, res, next) => {
   return res.status(200).json({ message: "Blog Deleted Successfully" });
 };
 
-export const getByUserId = async (req, res, next) => {
+const getByUserId = async (req, res, next) => {
   const userId = req.params?.id;
   let userBlog;
 
@@ -104,4 +104,13 @@ export const getByUserId = async (req, res, next) => {
     return res.status(404).json({ message: "No Blog Found" });
   }
   return res.status(200).json({ blogs: userBlog });
+};
+
+module.exports = {
+  getByUserId,
+  deleteBlog,
+  getById,
+  updateBlog,
+  addBlog,
+  getAllBlogs,
 };
